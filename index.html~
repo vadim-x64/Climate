@@ -11,6 +11,22 @@
 <div class="container">
     <h1>Клімат-контроль</h1>
 
+    <div class="humidity-animation-container">
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+    </div>
+
+
     <div class="fan-container">
         <div id="fan" class="fan">
             <div class="fan-blade"></div>
@@ -21,7 +37,6 @@
             <div class="fan-center"></div>
         </div>
     </div>
-
     <div class="control-item">
         <div class="control-label">Температура</div>
         <div class="control-row">
@@ -30,7 +45,6 @@
             <button id="temp-plus" class="control-btn">+</button>
         </div>
     </div>
-
     <div class="control-item">
         <div class="control-label">Швидкість вентилятора</div>
         <div class="control-row">
@@ -39,7 +53,6 @@
             <button id="fan-plus" class="control-btn">+</button>
         </div>
     </div>
-
     <div class="control-item">
         <div class="control-label">Вологість</div>
         <div class="control-row">
@@ -48,15 +61,11 @@
             <button id="humidity-plus" class="control-btn">+</button>
         </div>
     </div>
-
     <div id="auto-mode" class="auto-mode-btn active">Авто: Увімк</div>
-
     <div id="summary" class="summary">
         Поточні налаштування: 20°C, швидкість вентилятора 4 (авто), вологість 64%
     </div>
 </div>
-
 <script src="index.js"></script>
-
 </body>
 </html>

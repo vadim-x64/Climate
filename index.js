@@ -86,10 +86,50 @@ function decreaseFanSpeed() {
     }
 }
 
+function initializeRaindrops() {
+    const humidityAnimationContainer = document.querySelector('.humidity-animation-container');
+
+    humidityAnimationContainer.innerHTML = '';
+
+    const maxDrops = 50;
+
+    for (let i = 0; i < maxDrops; i++) {
+        const raindrop = document.createElement('div');
+        raindrop.className = 'raindrop';
+        raindrop.id = `raindrop-${i}`;
+        raindrop.style.left = Math.random() * 100 + '%';
+        raindrop.style.animationDuration = (5 + Math.random() * 3) + 's';
+        raindrop.style.animationDelay = (Math.random() * 5) + 's';
+        raindrop.style.display = 'none';
+        humidityAnimationContainer.appendChild(raindrop);
+    }
+
+    updateHumidityAnimation();
+}
+
+function updateHumidityAnimation() {
+    const maxDrops = 50;
+    const dropsPerIncrement = 10;
+    const increments = Math.ceil(humidity / 20);
+    const visibleDrops = Math.min(maxDrops, increments * dropsPerIncrement);
+
+    for (let i = 0; i < maxDrops; i++) {
+        const raindrop = document.getElementById(`raindrop-${i}`);
+        if (raindrop) {
+            if (i < visibleDrops) {
+                raindrop.style.display = 'block';
+            } else {
+                raindrop.style.display = 'none';
+            }
+        }
+    }
+}
+
 function increaseHumidity() {
     if (humidity < 100) {
         humidity++;
         updateUI();
+        updateHumidityAnimation();
     }
 }
 
@@ -97,8 +137,25 @@ function decreaseHumidity() {
     if (humidity > 0) {
         humidity--;
         updateUI();
+        updateHumidityAnimation();
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fanContainer = document.querySelector('.fan-container');
+    const humidityAnimationContainer = document.querySelector('.humidity-animation-container');
+
+    if (fanContainer && humidityAnimationContainer) {
+        humidityAnimationContainer.style.top = '0';
+        humidityAnimationContainer.style.left = '0';
+        humidityAnimationContainer.style.width = '100%';
+        humidityAnimationContainer.style.height = '100%';
+        fanContainer.appendChild(humidityAnimationContainer);
+    }
+
+    initializeRaindrops();
+});
+
 
 function toggleAutoMode() {
     autoFanControl = !autoFanControl;
