@@ -247,10 +247,47 @@ function updateFanAnimation() {
     }
 }
 
+let thermometerLevel = document.getElementById('thermometer-level');
+let thermometerBulb = document.querySelector('.thermometer-bulb');
+const maxDisplayTemp = 50;
+
+function getTemperatureColor(percentage) {
+    const cold = [59, 130, 246];
+    const medium = [255, 192, 0];
+    const hot = [255, 38, 38];
+
+    let r, g, b;
+
+    if (percentage <= 50) {
+        const factor = percentage / 50;
+        r = Math.round(cold[0] + factor * (medium[0] - cold[0]));
+        g = Math.round(cold[1] + factor * (medium[1] - cold[1]));
+        b = Math.round(cold[2] + factor * (medium[2] - cold[2]));
+    } else {
+        const factor = (percentage - 50) / 50;
+        r = Math.round(medium[0] + factor * (hot[0] - medium[0]));
+        g = Math.round(medium[1] + factor * (hot[1] - medium[1]));
+        b = Math.round(medium[2] + factor * (hot[2] - medium[2]));
+    }
+
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 function updateUI() {
     tempValue.textContent = `${temperature}°C`;
     fanValue.textContent = fanSpeed;
     humidityValue.textContent = `${humidity}%`;
+
+    if (thermometerLevel && thermometerBulb) {
+        const heightPercentage = Math.min(100, (temperature / maxDisplayTemp) * 100);
+        thermometerLevel.style.height = `${heightPercentage}%`;
+
+        const colorPercentage = (temperature / maxDisplayTemp) * 100;
+        const tempColor = getTemperatureColor(colorPercentage);
+
+        thermometerLevel.style.backgroundColor = tempColor;
+        thermometerBulb.style.backgroundColor = tempColor;
+    }
 
     let autoStatus = autoFanControl ? "(авто)" : "";
     summary.textContent = `Поточні налаштування: ${temperature}°C, швидкість вентилятора ${fanSpeed} ${autoStatus}, вологість ${humidity}%`;

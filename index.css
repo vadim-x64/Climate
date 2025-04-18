@@ -5,6 +5,81 @@
     font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
+.thermometer-container {
+    position: absolute;
+    right: 50px;
+    top: 100px;
+    transform: translateY(0);
+    width: 70px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.thermometer {
+    position: relative;
+    width: 30px;
+    height: 160px;
+}
+
+.thermometer-tube {
+    position: absolute;
+    width: 14px;
+    height: 130px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px 10px 0 0;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.thermometer-level {
+    position: absolute;
+    width: 10px;
+    height: 0%;
+    background-color: #ff5757;
+    border-radius: 8px 8px 0 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: height 1.5s ease, background-color 1.5s ease;
+}
+
+.thermometer-bulb {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background-color: #ff5757;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: background-color 1.5s ease;
+}
+
+.thermometer-scale {
+    position: absolute;
+    right: -30px;
+    height: 130px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-mid);
+}
+
+.thermometer-scale-mark {
+    position: absolute;
+    right: 0;
+    transform: translateY(50%);
+}
+
 :root {
     --primary-color: #3b82f6;
     --primary-hover: #2563eb;
@@ -361,6 +436,18 @@ h1 {
     .fan-center {
         width: 28px;
         height: 28px;
+    }
+
+    .thermometer-container {
+        right: 30px;
+        width: 50px;
+        height: 100px;
+        top: 85px;
+    }
+
+    .thermometer-scale {
+        right: -20px;
+        font-size: 10px;
     }
 
     @keyframes fall {
